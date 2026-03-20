@@ -100,6 +100,18 @@ export const geminiService = {
         },
       },
     });
-    return JSON.parse(response.text || "{}");
+
+    try {
+      return JSON.parse(response.text || "{}");
+    } catch (error) {
+      console.error("Failed to parse Gemini response as JSON:", error);
+      return {
+        structure: [],
+        features: [],
+        frontend: "",
+        backend: "",
+        masterPrompt: ""
+      };
+    }
   }
 };
