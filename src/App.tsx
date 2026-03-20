@@ -26,16 +26,16 @@ import WebArchitect from './components/WebArchitect';
 
 type ModuleType = 'marketing' | 'prompt' | 'workflow' | 'creative' | 'web';
 
+const navItems = [
+  { id: 'marketing', label: 'Marketing Hub', icon: PenTool, color: 'text-orange-500' },
+  { id: 'prompt', label: 'Prompt Lab', icon: Terminal, color: 'text-blue-500' },
+  { id: 'workflow', label: 'Logic Engine', icon: Workflow, color: 'text-purple-500' },
+  { id: 'creative', label: 'Creative Studio', icon: Palette, color: 'text-pink-500' },
+  { id: 'web', label: 'Web Architect', icon: Globe, color: 'text-emerald-500' },
+];
+
 export default function App() {
   const [activeModule, setActiveModule] = useState<ModuleType>('marketing');
-
-  const navItems = [
-    { id: 'marketing', label: 'Marketing Hub', icon: PenTool, color: 'text-orange-500' },
-    { id: 'prompt', label: 'Prompt Lab', icon: Terminal, color: 'text-blue-500' },
-    { id: 'workflow', label: 'Logic Engine', icon: Workflow, color: 'text-purple-500' },
-    { id: 'creative', label: 'Creative Studio', icon: Palette, color: 'text-pink-500' },
-    { id: 'web', label: 'Web Architect', icon: Globe, color: 'text-emerald-500' },
-  ];
 
   return (
     <div className="flex h-screen bg-[#050505] text-white font-sans overflow-hidden">
