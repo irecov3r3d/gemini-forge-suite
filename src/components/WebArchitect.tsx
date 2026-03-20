@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { geminiService } from '../services/geminiService';
-import { Loader2, Globe, Code2, Layout, ShieldCheck, Rocket, Copy, Check, Terminal } from 'lucide-react';
+import { Loader2, Globe, Layout, ShieldCheck, Rocket, Copy, Check, Terminal } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export default function WebArchitect() {
