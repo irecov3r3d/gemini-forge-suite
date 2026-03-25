@@ -41,7 +41,7 @@ export default function App() {
     <div className="flex h-screen bg-[#050505] text-white font-sans overflow-hidden">
       {/* Sidebar */}
       <aside className="w-64 border-r border-white/10 flex flex-col bg-[#0a0a0a]">
-        <div className="p-6 flex items-center gap-3 border-bottom border-white/10">
+        <div className="p-6 flex items-center gap-3 border-b border-white/10">
           <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center shadow-lg shadow-indigo-500/20">
             <Sparkles className="w-5 h-5 text-white" />
           </div>

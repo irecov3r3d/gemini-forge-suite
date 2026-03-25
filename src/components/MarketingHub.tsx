@@ -18,6 +18,7 @@ const CATEGORIES = [
 export default function MarketingHub() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState('');
+  const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [form, setForm] = useState({
     category: CATEGORIES[0],
@@ -27,12 +28,13 @@ export default function MarketingHub() {
   });
 
   const handleGenerate = async () => {
+    setError(null);
     setLoading(true);
     try {
       const content = await geminiService.generateMarketingContent(form);
       setResult(content || '');
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An unexpected error occurred");
     } finally {
       setLoading(false);
     }
@@ -103,6 +105,12 @@ export default function MarketingHub() {
               />
             </div>
           </div>
+
+          {error && (
+            <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-xs">
+              {error}
+            </div>
+          )}
 
           <button
             onClick={handleGenerate}

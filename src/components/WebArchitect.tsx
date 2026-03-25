@@ -7,6 +7,7 @@ export default function WebArchitect() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<any>(null);
   const [copied, setCopied] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState({
     type: '',
     audience: '',
@@ -15,12 +16,13 @@ export default function WebArchitect() {
 
   const handleArchitect = async () => {
     if (!form.type || !form.audience) return;
+    setError(null);
     setLoading(true);
     try {
       const data = await geminiService.architectWebsite(form);
       setResult(data);
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An unexpected error occurred");
     } finally {
       setLoading(false);
     }
@@ -81,6 +83,12 @@ export default function WebArchitect() {
               />
             </div>
           </div>
+
+          {error && (
+            <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-xs">
+              {error}
+            </div>
+          )}
 
           <button
             onClick={handleArchitect}

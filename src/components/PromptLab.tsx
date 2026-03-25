@@ -9,15 +9,17 @@ export default function PromptLab() {
   const [prompt, setPrompt] = useState('');
   const [analysis, setAnalysis] = useState('');
   const [copied, setCopied] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleAnalyze = async () => {
     if (!prompt) return;
+    setError(null);
     setLoading(true);
     try {
       const result = await geminiService.analyzePrompt(prompt);
       setAnalysis(result || '');
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An unexpected error occurred");
     } finally {
       setLoading(false);
     }
@@ -48,6 +50,11 @@ export default function PromptLab() {
             onChange={(e) => setPrompt(e.target.value)}
             className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm min-h-[150px] focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all resize-none font-mono"
           />
+          {error && (
+            <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-xs">
+              {error}
+            </div>
+          )}
           <button
             onClick={handleAnalyze}
             disabled={loading || !prompt}

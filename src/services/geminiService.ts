@@ -4,8 +4,8 @@ const apiKey = process.env.GEMINI_API_KEY || "";
 const ai = new GoogleGenAI({ apiKey });
 
 export const MODELS = {
-  FLASH: "gemini-3-flash-preview",
-  PRO: "gemini-3.1-pro-preview",
+  FLASH: "gemini-1.5-flash",
+  PRO: "gemini-1.5-pro",
   IMAGE: "gemini-2.5-flash-image",
 };
 

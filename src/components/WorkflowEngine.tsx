@@ -8,15 +8,17 @@ export default function WorkflowEngine() {
   const [loading, setLoading] = useState(false);
   const [topic, setTopic] = useState('');
   const [result, setResult] = useState('');
+  const [error, setError] = useState<string | null>(null);
 
   const handleThink = async () => {
     if (!topic) return;
+    setError(null);
     setLoading(true);
     try {
       const content = await geminiService.deepThink(topic);
       setResult(content || '');
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An unexpected error occurred");
     } finally {
       setLoading(false);
     }
@@ -45,6 +47,11 @@ export default function WorkflowEngine() {
               onChange={(e) => setTopic(e.target.value)}
               className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-sm min-h-[120px] focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all resize-none"
             />
+            {error && (
+              <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-xs">
+                {error}
+              </div>
+            )}
             <button
               onClick={handleThink}
               disabled={loading || !topic}
